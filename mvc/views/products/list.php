@@ -15,7 +15,7 @@
             <td>Ten san pham</td>
             <td>Gia</td>
         </tr>
-        <?php foreach ($product as $key => $value){ ?>
+        <?php foreach ($products as $key => $value){ ?>
         <tr>
             <td><?php echo $value["id"]?></td>
             <td>Ten san pham</td>
