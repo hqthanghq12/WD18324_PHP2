@@ -9,6 +9,7 @@ class db{
             DBUSER,
             DBPASS
         );
+
         return $connect;
     }
 
@@ -27,4 +28,6 @@ class db{
     }
 
 }
+$db = new db();
+$db->getConnect();
 ?>
