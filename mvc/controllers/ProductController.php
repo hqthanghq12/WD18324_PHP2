@@ -6,7 +6,7 @@ class ProductController{
    public function listProduct(){
         $product = new Product();
         $products =$product->getAllProduct();
-        include "views/products/list.php";
+        include "views/products/list.blade.php";
     }
 
     public function addProduct(){
