@@ -16,4 +16,56 @@ class  ProductController extends BaseController {
 //        die();
         return $this->render('product.list', compact('products'));
     }
+    public function addProduct(){
+        return $this->render('product.add');
+    }
+    public function postProduct(){
+        // validate form
+        if(isset($_POST['gui'])){
+            $error = [];
+            // rỗng
+            if(empty($_POST['ten'])){
+                $error[] = "Bạn vui lòng nhập tên";
+            }
+            if(empty($_POST['gia'])){
+                $error[] = "Bạn vui lòng nhập gia";
+            }
+            if(count($error)>=1){
+                flash('errors', $error, 'add-product');
+            }else{
+                $check = $this->product->addProduct(null, $_POST['ten'],$_POST['gia']);
+                if ($check){
+                    flash('success', "Thêm thành công", 'add-product');
+                }
+            }
+        }
+
+    }
+    public function detail($id){
+//        var_dump($id);
+//        die();
+        $products = $this->product->detailProduct($id);
+        return $this->render('product.edit', compact('products'));
+    }
+    public function editProduct($id){
+        if(isset($_POST['gui'])){
+            $error = [];
+            // rỗng
+            if(empty($_POST['ten'])){
+                $error[] = "Bạn vui lòng nhập tên";
+            }
+            if(empty($_POST['gia'])){
+                $error[] = "Bạn vui lòng nhập gia";
+            }
+            if(count($error)>=1){
+                flash('errors', $error, 'add-product');
+            }else{
+                $check = $this->product->updateProduct($id, $_POST['ten'],$_POST['gia']);
+                if ($check){
+                    $editRoute = 'detail-product/'.$id;
+                    flash('success', "Sửa thành công", $editRoute);
+                }
+            }
+        }
+    }
 }
